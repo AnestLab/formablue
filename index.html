@@ -11,32 +11,74 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
   <style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin:0; padding:0; }
+  body { background:#F7F7F5; font-family:'Nunito',sans-serif; }
+
+  @keyframes splashIn  { 0%{opacity:0;transform:scale(.6) translateY(40px)} 65%{transform:scale(1.06) translateY(-8px);opacity:1} 100%{transform:scale(1) translateY(0);opacity:1} }
+  @keyframes fadeUp    { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeIn    { from{opacity:0} to{opacity:1} }
+  @keyframes floatAnim { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+  @keyframes shake     { 0%,100%{transform:translateX(0)} 20%,60%{transform:translateX(-7px)} 40%,80%{transform:translateX(7px)} }
+  @keyframes pop       { 0%{transform:scale(.8);opacity:0} 60%{transform:scale(1.1);opacity:1} 100%{transform:scale(1)} }
+  @keyframes modalIn   { 0%{opacity:0;transform:scale(.55) translateY(50px)} 65%{transform:scale(1.04);opacity:1} 100%{transform:scale(1);opacity:1} }
+  @keyframes coinFall  { 0%{opacity:1;transform:translateY(-60px) rotate(0) scale(.5)} 85%{opacity:1} 100%{opacity:0;transform:translateY(120vh) rotate(800deg) scale(1)} }
+  @keyframes coinPop   { 0%{opacity:0;transform:scale(.2) translateY(20px)} 60%{transform:scale(1.15);opacity:1} 100%{transform:scale(1);opacity:1} }
+  @keyframes toastIn   { from{opacity:0;transform:translateY(-90px) scale(.85)} to{opacity:1;transform:translateY(0) scale(1)} }
+  @keyframes slideUp   { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes xpGrow    { from{width:0} to{width:100%} }
+  @keyframes streakFire{ 0%,100%{transform:scale(1) rotate(-5deg)} 50%{transform:scale(1.25) rotate(5deg)} }
+  @keyframes heartbeat { 0%,100%{transform:scale(1)} 50%{transform:scale(1.5)} }
+  @keyframes comboAnim { 0%{opacity:0;transform:scale(.5) translateY(10px)} 40%{transform:scale(1.3);opacity:1} 70%{transform:scale(.95)} 100%{transform:scale(1);opacity:1} }
+  @keyframes sparkle   { 0%{opacity:1;transform:scale(0) rotate(0)} 100%{opacity:0;transform:scale(1.5) rotate(180deg)} }
+  @keyframes levelUp   { 0%{opacity:0;transform:scale(.3) rotate(-10deg)} 60%{transform:scale(1.12) rotate(3deg);opacity:1} 80%{transform:scale(.96)} 100%{transform:scale(1) rotate(0);opacity:1} }
+  @keyframes wag       { 0%,100%{transform:rotate(0)} 30%{transform:rotate(25deg)} 60%{transform:rotate(-20deg)} }
+  @keyframes blink     { 0%,90%,100%{transform:scaleY(1)} 95%{transform:scaleY(0.05)} }
+  @keyframes chew      { 0%,100%{transform:scaleY(1)} 50%{transform:scaleY(0.85) translateY(2px)} }
+  @keyframes earTwitch { 0%,100%{transform:rotate(0)} 50%{transform:rotate(-8deg)} }
+
+  .splash-in  { animation: splashIn .9s cubic-bezier(.34,1.56,.64,1) forwards }
+  .fade-up    { animation: fadeUp .5s ease both }
+  .float      { animation: floatAnim 3.5s ease-in-out infinite }
+  .shake      { animation: shake .45s ease }
+  .pop        { animation: pop .4s cubic-bezier(.34,1.56,.64,1) both }
+  .modal-in   { animation: modalIn .6s cubic-bezier(.34,1.56,.64,1) forwards }
+  .coin-pop   { animation: coinPop .5s ease forwards }
+  .toast-in   { animation: toastIn .45s cubic-bezier(.34,1.56,.64,1) forwards }
+  .combo      { animation: comboAnim .5s cubic-bezier(.34,1.56,.64,1) both }
+  .level-up   { animation: levelUp .7s cubic-bezier(.34,1.56,.64,1) both }
+  .slide-up   { animation: slideUp .4s ease both }
+  .fire       { animation: streakFire .7s ease-in-out infinite }
+
+  .tappable   { cursor:pointer; transition:transform .1s,filter .1s; user-select:none }
+  .tappable:active { transform:scale(.95); filter:brightness(.92) }
+
+  ::-webkit-scrollbar { width:4px }
+  ::-webkit-scrollbar-thumb { background:#DDD; border-radius:4px }
+
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html,body{height:100%;background:#F0F4FF}
     #root{height:100%}
     body{font-family:'Nunito',sans-serif;-webkit-font-smoothing:antialiased;overscroll-behavior:none}
     .tappable{cursor:pointer;transition:opacity .12s,transform .12s;-webkit-tap-highlight-color:transparent}
     .tappable:active{opacity:.82;transform:scale(.97)}
-    #loading{position:fixed;inset:0;background:#F0F4FF;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;z-index:9999}
-    #loading-dot{width:52px;height:52px;border:5px solid #E3EFFF;border-top-color:#1A7FD4;border-radius:50%;animation:spin 1s linear infinite}
-    @keyframes spin{to{transform:rotate(360deg)}}
+    #fb-loading{position:fixed;inset:0;background:#F0F4FF;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;z-index:9999;font-family:'Nunito',sans-serif}
+    #fb-spinner{width:52px;height:52px;border:5px solid #E3EFFF;border-top-color:#1A7FD4;border-radius:50%;animation:spin 1s linear infinite}
   </style>
 </head>
 <body>
-  <div id="loading">
-    <div id="loading-dot"></div>
-    <div style="font-family:'Nunito',sans-serif;font-weight:800;font-size:18px;color:#1A7FD4;letter-spacing:1px">FormaBlue</div>
+  <div id="fb-loading">
+    <div id="fb-spinner"></div>
+    <div style="font-weight:800;font-size:18px;color:#1A7FD4;letter-spacing:1px">FormaBlue</div>
     <div style="font-size:12px;color:#8AA4C8">carregando...</div>
   </div>
   <div id="root"></div>
 
-  <!-- React -->
+  <!-- React 18 -->
   <script src="https://cdn.jsdelivr.net/npm/react@18/umd/react.production.min.js" crossorigin></script>
   <script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
-  <!-- Babel -->
-  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.24.0/babel.min.js"></script>
 
-  <!-- Analytics (JS puro, fora do Babel) -->
+  <!-- Analytics PostHog (JS puro, sem Babel) -->
   <script>
 /* ══════════════════════════════════════════════════════════
    FORMABLUE ANALYTICS — PostHog Integration
@@ -314,7 +356,10 @@ const Analytics = (() => {
 
   </script>
 
-  <!-- App React/JSX -->
+  <!-- Babel standalone -->
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.24.0/babel.min.js"></script>
+
+  <!-- App FormaBlue (JSX compilado pelo Babel) -->
   <script type="text/babel" data-presets="react">
 import { useState, useEffect, useCallback, useRef } from "react";
 
@@ -324,52 +369,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
    Melhorias: combo, streak dramático, badges, retenção
 ═══════════════════════════════════════════════════════════ */
 
-const CSS = `
-  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
-  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin:0; padding:0; }
-  body { background:#F7F7F5; font-family:'Nunito',sans-serif; }
-
-  @keyframes splashIn  { 0%{opacity:0;transform:scale(.6) translateY(40px)} 65%{transform:scale(1.06) translateY(-8px);opacity:1} 100%{transform:scale(1) translateY(0);opacity:1} }
-  @keyframes fadeUp    { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-  @keyframes fadeIn    { from{opacity:0} to{opacity:1} }
-  @keyframes floatAnim { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
-  @keyframes shake     { 0%,100%{transform:translateX(0)} 20%,60%{transform:translateX(-7px)} 40%,80%{transform:translateX(7px)} }
-  @keyframes pop       { 0%{transform:scale(.8);opacity:0} 60%{transform:scale(1.1);opacity:1} 100%{transform:scale(1)} }
-  @keyframes modalIn   { 0%{opacity:0;transform:scale(.55) translateY(50px)} 65%{transform:scale(1.04);opacity:1} 100%{transform:scale(1);opacity:1} }
-  @keyframes coinFall  { 0%{opacity:1;transform:translateY(-60px) rotate(0) scale(.5)} 85%{opacity:1} 100%{opacity:0;transform:translateY(120vh) rotate(800deg) scale(1)} }
-  @keyframes coinPop   { 0%{opacity:0;transform:scale(.2) translateY(20px)} 60%{transform:scale(1.15);opacity:1} 100%{transform:scale(1);opacity:1} }
-  @keyframes toastIn   { from{opacity:0;transform:translateY(-90px) scale(.85)} to{opacity:1;transform:translateY(0) scale(1)} }
-  @keyframes slideUp   { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
-  @keyframes xpGrow    { from{width:0} to{width:100%} }
-  @keyframes streakFire{ 0%,100%{transform:scale(1) rotate(-5deg)} 50%{transform:scale(1.25) rotate(5deg)} }
-  @keyframes heartbeat { 0%,100%{transform:scale(1)} 50%{transform:scale(1.5)} }
-  @keyframes comboAnim { 0%{opacity:0;transform:scale(.5) translateY(10px)} 40%{transform:scale(1.3);opacity:1} 70%{transform:scale(.95)} 100%{transform:scale(1);opacity:1} }
-  @keyframes sparkle   { 0%{opacity:1;transform:scale(0) rotate(0)} 100%{opacity:0;transform:scale(1.5) rotate(180deg)} }
-  @keyframes levelUp   { 0%{opacity:0;transform:scale(.3) rotate(-10deg)} 60%{transform:scale(1.12) rotate(3deg);opacity:1} 80%{transform:scale(.96)} 100%{transform:scale(1) rotate(0);opacity:1} }
-  @keyframes wag       { 0%,100%{transform:rotate(0)} 30%{transform:rotate(25deg)} 60%{transform:rotate(-20deg)} }
-  @keyframes blink     { 0%,90%,100%{transform:scaleY(1)} 95%{transform:scaleY(0.05)} }
-  @keyframes chew      { 0%,100%{transform:scaleY(1)} 50%{transform:scaleY(0.85) translateY(2px)} }
-  @keyframes earTwitch { 0%,100%{transform:rotate(0)} 50%{transform:rotate(-8deg)} }
-
-  .splash-in  { animation: splashIn .9s cubic-bezier(.34,1.56,.64,1) forwards }
-  .fade-up    { animation: fadeUp .5s ease both }
-  .float      { animation: floatAnim 3.5s ease-in-out infinite }
-  .shake      { animation: shake .45s ease }
-  .pop        { animation: pop .4s cubic-bezier(.34,1.56,.64,1) both }
-  .modal-in   { animation: modalIn .6s cubic-bezier(.34,1.56,.64,1) forwards }
-  .coin-pop   { animation: coinPop .5s ease forwards }
-  .toast-in   { animation: toastIn .45s cubic-bezier(.34,1.56,.64,1) forwards }
-  .combo      { animation: comboAnim .5s cubic-bezier(.34,1.56,.64,1) both }
-  .level-up   { animation: levelUp .7s cubic-bezier(.34,1.56,.64,1) both }
-  .slide-up   { animation: slideUp .4s ease both }
-  .fire       { animation: streakFire .7s ease-in-out infinite }
-
-  .tappable   { cursor:pointer; transition:transform .1s,filter .1s; user-select:none }
-  .tappable:active { transform:scale(.95); filter:brightness(.92) }
-
-  ::-webkit-scrollbar { width:4px }
-  ::-webkit-scrollbar-thumb { background:#DDD; border-radius:4px }
-`;
+const CSS = ""; /* CSS loaded in <style> tag */
 
 const C = {
   bg:"#F7F7F5", w:"#FFFFFF",
@@ -389,8 +389,7 @@ const C = {
 };
 const ML = 3;
 
-
-// Analytics loaded separately
+/* analytics loaded separately */
 
 /* ══════════════════════════════════════════════════════════
    CAPIVARA TED — Mascote principal
@@ -2280,10 +2279,10 @@ function FormaBlue() {
   );
 }
 
-
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(React.createElement(FormaBlue));
-    document.getElementById('loading').style.display = 'none';
+    const domRoot = ReactDOM.createRoot(document.getElementById('root'));
+    domRoot.render(React.createElement(FormaBlue));
+    const loader = document.getElementById('fb-loading');
+    if (loader) loader.style.display = 'none';
   </script>
 </body>
 </html>
