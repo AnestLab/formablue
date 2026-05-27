@@ -2,14 +2,12 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
   <meta name="theme-color" content="#1A7FD4"/>
   <meta name="apple-mobile-web-app-capable" content="yes"/>
-  <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
-  <meta name="description" content="FormaBlue — Treine decisoes medicas em 5 minutos por dia"/>
+  <meta name="description" content="FormaBlue - Treine decisoes medicas em 5 minutos por dia"/>
   <title>FormaBlue</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet"/>
   <style>
   @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin:0; padding:0; }
@@ -57,30 +55,25 @@
   ::-webkit-scrollbar-thumb { background:#DDD; border-radius:4px }
 
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%;background:#F0F4FF}
-    #root{height:100%}
-    body{font-family:'Nunito',sans-serif;-webkit-font-smoothing:antialiased;overscroll-behavior:none}
+    html,body,#root{height:100%}
+    body{font-family:'Nunito',sans-serif;-webkit-font-smoothing:antialiased;overscroll-behavior:none;background:#F0F4FF}
     .tappable{cursor:pointer;transition:opacity .12s,transform .12s;-webkit-tap-highlight-color:transparent}
     .tappable:active{opacity:.82;transform:scale(.97)}
-    #fb-loading{position:fixed;inset:0;background:#F0F4FF;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;z-index:9999;font-family:'Nunito',sans-serif}
-    #fb-spinner{width:52px;height:52px;border:5px solid #E3EFFF;border-top-color:#1A7FD4;border-radius:50%;animation:spin 1s linear infinite}
+    #fb-load{position:fixed;inset:0;background:#F0F4FF;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;z-index:9999}
+    #fb-spin{width:50px;height:50px;border:5px solid #E3EFFF;border-top-color:#1A7FD4;border-radius:50%;animation:spin 1s linear infinite}
   </style>
 </head>
 <body>
-  <div id="fb-loading">
-    <div id="fb-spinner"></div>
-    <div style="font-weight:800;font-size:18px;color:#1A7FD4;letter-spacing:1px">FormaBlue</div>
-    <div style="font-size:12px;color:#8AA4C8">carregando...</div>
+  <div id="fb-load">
+    <div id="fb-spin"></div>
+    <div style="font-family:'Nunito',sans-serif;font-weight:800;font-size:20px;color:#1A7FD4;letter-spacing:1px">FormaBlue</div>
+    <div style="font-family:'Nunito',sans-serif;font-size:12px;color:#8AA4C8">carregando...</div>
   </div>
   <div id="root"></div>
 
-  <!-- React 18 -->
-  <script src="https://cdn.jsdelivr.net/npm/react@18/umd/react.production.min.js" crossorigin></script>
-  <script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
-
-  <!-- Analytics PostHog (JS puro, sem Babel) -->
-  <script>
-/* ══════════════════════════════════════════════════════════
+  <script src="https://cdn.jsdelivr.net/npm/react@18/umd/react.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script>/* ══════════════════════════════════════════════════════════
    FORMABLUE ANALYTICS — PostHog Integration
    ─────────────────────────────────────────────────────────
    SETUP (1 vez, no seu index.html ou _app.jsx):
@@ -353,15 +346,8 @@ const Analytics = (() => {
   };
 })();
 
-
-  </script>
-
-  <!-- Babel standalone -->
-  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.24.0/babel.min.js"></script>
-
-  <!-- App FormaBlue (JSX compilado pelo Babel) -->
-  <script type="text/babel" data-presets="react">
-import { useState, useEffect, useCallback, useRef } from "react";
+</script>
+  <script>import { useState, useEffect, useCallback, useRef } from "react";
 
 /* ═══════════════════════════════════════════════════════════
    FORMARED — v3 · Capivara Ted · Premium UX
@@ -369,7 +355,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
    Melhorias: combo, streak dramático, badges, retenção
 ═══════════════════════════════════════════════════════════ */
 
-const CSS = ""; /* CSS loaded in <style> tag */
+const CSS = "";
 
 const C = {
   bg:"#F7F7F5", w:"#FFFFFF",
@@ -389,7 +375,7 @@ const C = {
 };
 const ML = 3;
 
-/* analytics loaded separately */
+/* analytics */
 
 /* ══════════════════════════════════════════════════════════
    CAPIVARA TED — Mascote principal
@@ -596,7 +582,9 @@ function Ted({ mood = "idle", size = 80, style: ext = {} }) {
     </svg>
   );
 }
-
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.24.0/babel.min.js"></script>
+  <script type="text/babel" data-presets="react">
 
 /* ── UI PRIMITIVES ─────────────────────────────────────── */
 function Bar({ v, m, color, h = 10 }) {
@@ -916,6 +904,9 @@ const Q = {
     {id:"C",t:"Pede ao paciente pagar e reembolsar.",                 s:{P:45,C:50,S:55,E:55,J:45}},
     {id:"D",t:"Fica horas na linha com o plano.",                     s:{P:30,C:35,S:25,E:35,J:30}},
   ]},
+  </script>
+
+  <script type="text/babel" data-presets="react">
   a15:{ q:"Colega diz que você cobra demais.", x:"\"Vai afastar paciente.\" Você cobra mais que o mercado local.", ok:"B", o:[
     {id:"A",t:"Baixa o preço imediatamente.",                         s:{P:20,C:35,S:30,E:45,J:25}},
     {id:"B",t:"Avalia os dados e decide com critério próprio.",       s:{P:85,C:80,S:80,E:65,J:85}},
@@ -1051,6 +1042,9 @@ const Q = {
     {id:"D",t:"Declara renda extra retroativamente.",                 s:{P:25,C:30,S:20,E:25,J:15}},
   ]},
   /* SÓCIOS E CLÍNICAS */
+  </script>
+
+  <script type="text/babel" data-presets="react">
   d1:{ q:"Sócio quer entrar sem investir dinheiro.", x:"Amigo médico quer 30% por \"trazer pacientes\".", ok:"B", o:[
     {id:"A",t:"Aceita — ele vai trazer pacientes.",                   s:{P:30,C:45,S:25,E:50,J:20}},
     {id:"B",t:"Negocia vesting com metas claras e formaliza.",        s:{P:85,C:80,S:85,E:65,J:85}},
@@ -1652,6 +1646,9 @@ function Onboarding({ onDone }) {
 
 
 /* ── SPLASH ─────────────────────────────────────────────── */
+  </script>
+
+  <script type="text/babel" data-presets="react">
 function Splash({ onDone }) {
   useEffect(() => {
     Analytics.appOpen();
@@ -1889,6 +1886,9 @@ function Home({ xp, coins, streak, combo, prog, profile, streakData, freezeStrea
 }
 
 /* ── NODE MAP ───────────────────────────────────────────── */
+  </script>
+
+  <script type="text/babel" data-presets="react">
 function NodeMap({ wid, prog, onNav }) {
   const w = WORLDS.find(x=>x.id===wid);
   const wp = prog[wid]||{d:[],n:[]};
@@ -1952,6 +1952,9 @@ function NodeMap({ wid, prog, onNav }) {
 
 
 /* ── PLAY SCREEN ────────────────────────────────────────── */
+  </script>
+
+  <script type="text/babel" data-presets="react">
 function Play({ wid, nid, idx, prog, onResult, onNav }) {
   const w     = WORLDS.find(x=>x.id===wid);
   const nd    = w.nodes.find(n=>n.id===nid);
@@ -2279,10 +2282,11 @@ function FormaBlue() {
   );
 }
 
-    const domRoot = ReactDOM.createRoot(document.getElementById('root'));
-    domRoot.render(React.createElement(FormaBlue));
-    const loader = document.getElementById('fb-loading');
-    if (loader) loader.style.display = 'none';
+  </script>
+
+  <script type="text/babel" data-presets="react">
+    ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(FormaBlue));
+    const l=document.getElementById('fb-load'); if(l) l.style.display='none';
   </script>
 </body>
 </html>
