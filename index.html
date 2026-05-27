@@ -5,40 +5,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <meta name="theme-color" content="#1A7FD4"/>
   <meta name="apple-mobile-web-app-capable" content="yes"/>
-  <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
   <meta name="description" content="FormaBlue — Treine decisões médicas em 5 minutos por dia"/>
   <title>FormaBlue</title>
-
-  <!-- PWA manifest -->
-  <link rel="manifest" href="manifest.json"/>
-
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
-
-  <!-- React + ReactDOM (CDN) -->
-  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-
-  <!-- Babel standalone para transpilar JSX no browser -->
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; background: #F8F9FA; }
-    #root { height: 100%; }
-    body { font-family: 'Nunito', sans-serif; -webkit-font-smoothing: antialiased; }
-    /* Prevent iOS bounce */
-    body { overscroll-behavior: none; }
-    /* Tappable feedback */
-    .tappable { cursor: pointer; transition: opacity .12s, transform .12s; -webkit-tap-highlight-color: transparent; }
-    .tappable:active { opacity: .82; transform: scale(.97); }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;background:#F0F4FF}
+    #root{height:100%}
+    body{font-family:'Nunito',sans-serif;-webkit-font-smoothing:antialiased;overscroll-behavior:none}
+    .tappable{cursor:pointer;transition:opacity .12s,transform .12s;-webkit-tap-highlight-color:transparent}
+    .tappable:active{opacity:.82;transform:scale(.97)}
+    #loading{position:fixed;inset:0;background:#F0F4FF;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;z-index:9999}
+    #loading-dot{width:48px;height:48px;border:5px solid #E3EFFF;border-top-color:#1A7FD4;border-radius:50%;animation:spin 1s linear infinite}
+    #loading-text{font-family:'Nunito',sans-serif;font-weight:800;font-size:16px;color:#1A7FD4;letter-spacing:1px}
+    @keyframes spin{to{transform:rotate(360deg)}}
   </style>
 </head>
 <body>
+  <div id="loading">
+    <div id="loading-dot"></div>
+    <div id="loading-text">FormaBlue</div>
+    <div style="font-size:12px;color:#8AA;margin-top:-8px">carregando...</div>
+  </div>
   <div id="root"></div>
 
-  <script type="text/babel" data-presets="react">
+  <script src="https://cdn.jsdelivr.net/npm/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7/babel.min.js"></script>
+
+  <script>
+    window.addEventListener('error', function(e) {
+      document.getElementById('loading').innerHTML =
+        '<div style="padding:32px;text-align:center;font-family:sans-serif">' +
+        '<div style="font-size:32px;margin-bottom:16px">⚠️</div>' +
+        '<div style="font-weight:800;color:#1A7FD4;font-size:18px;margin-bottom:8px">FormaBlue</div>' +
+        '<div style="color:#666;font-size:13px">Erro ao carregar. Tente novamente.</div>' +
+        '<button onclick="location.reload()" style="margin-top:20px;background:#1A7FD4;color:white;border:none;padding:12px 24px;border-radius:12px;font-size:14px;font-weight:800;cursor:pointer">Recarregar</button>' +
+        '</div>';
+    });
+  </script>
+
+  <script type="text/babel" data-presets="react" data-plugins="">
 import { useState, useEffect, useCallback, useRef } from "react";
 
 /* ═══════════════════════════════════════════════════════════
@@ -2275,9 +2283,9 @@ function FormaBlue() {
 }
 
 
-    // Render
     const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<FormaBlue/>);
+    root.render(React.createElement(FormaBlue));
+    document.getElementById('loading').style.display = 'none';
   </script>
 </body>
 </html>
